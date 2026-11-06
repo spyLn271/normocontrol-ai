@@ -1,0 +1,162 @@
+/*
+ * Дизайн-токены Normocontrol AI.
+ * Источник стиля: Refero Styles — дизайн-система Dub (см. docs/FRONTEND.md). Берём стиль, не бренд.
+ * Компоненты используют только эти токены — никаких «магических» цветов и размеров.
+ *
+ * Контраст (WCAG AA, ≥ 4.5:1 для текста):
+ *   fg #171717 / bg #fff — 17.9 · muted #737373 / #fff — 4.74 (на #f5f5f5 — 4.35, поэтому
+ *   на подложке bg-subtle мелкий текст пишем цветом fg) · accent #2563eb / #fff — 5.17.
+ * Цвета серьёзности из FRONTEND.md (#dc2626, #ea580c, #2563eb, #16a34a) используются для
+ * графики (точки, диаграммы, рамки); текст бейджей — более тёмные оттенки *-fg, иначе
+ * на светлом фоне контраст 3.0–4.2 (не проходит AA):
+ *   error-fg #b91c1c / #fee2e2 — 5.30 · warning-fg #9a3412 / #ffedd5 — 6.38
+ *   info-fg #1d4ed8 / #dbeaff — 5.50 · ok-fg #166534 / #dcfce7 — 6.49
+ */
+
+:root {
+  --nc-bg: #ffffff;
+  --nc-bg-subtle: #f5f5f5;
+  --nc-border: #e5e5e5;
+  --nc-border-strong: #d4d4d4;
+  --nc-fg: #171717;
+  --nc-fg-muted: #737373;
+  --nc-accent: #2563eb;
+  --nc-accent-subtle: #dbeaff;
+  --nc-primary: #0a0a0a;
+  --nc-primary-hover: #262626;
+  --nc-primary-fg: #ffffff;
+  --nc-ring: #2563eb;
+
+  --nc-error: #dc2626;
+  --nc-error-fg: #b91c1c;
+  --nc-error-subtle: #fee2e2;
+  --nc-warning: #ea580c;
+  --nc-warning-fg: #9a3412;
+  --nc-warning-subtle: #ffedd5;
+  --nc-info: #2563eb;
+  --nc-info-fg: #1d4ed8;
+  --nc-info-subtle: #dbeaff;
+  --nc-ok: #16a34a;
+  --nc-ok-fg: #166534;
+  --nc-ok-subtle: #dcfce7;
+
+  /* Палитра диаграмм (категории ошибок): 8 различимых оттенков, первые — акцент и нейтральные */
+  --nc-chart-1: #2563eb;
+  --nc-chart-2: #ea580c;
+  --nc-chart-3: #16a34a;
+  --nc-chart-4: #9333ea;
+  --nc-chart-5: #dc2626;
+  --nc-chart-6: #0891b2;
+  --nc-chart-7: #ca8a04;
+  --nc-chart-8: #525252;
+  --nc-chart-track: #e5e5e5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --nc-bg: #0a0a0a;
+    --nc-bg-subtle: #171717;
+    --nc-border: #262626;
+    --nc-border-strong: #404040;
+    --nc-fg: #fafafa;
+    --nc-fg-muted: #a3a3a3;
+    --nc-accent: #60a5fa;
+    --nc-accent-subtle: #172554;
+    --nc-primary: #fafafa;
+    --nc-primary-hover: #e5e5e5;
+    --nc-primary-fg: #0a0a0a;
+    --nc-ring: #60a5fa;
+
+    --nc-error: #f87171;
+    --nc-error-fg: #fca5a5;
+    --nc-error-subtle: #3b1414;
+    --nc-warning: #fb923c;
+    --nc-warning-fg: #fdba74;
+    --nc-warning-subtle: #3a1d0b;
+    --nc-info: #60a5fa;
+    --nc-info-fg: #93c5fd;
+    --nc-info-subtle: #172554;
+    --nc-ok: #4ade80;
+    --nc-ok-fg: #86efac;
+    --nc-ok-subtle: #0f2a1a;
+
+    --nc-chart-1: #60a5fa;
+    --nc-chart-2: #fb923c;
+    --nc-chart-3: #4ade80;
+    --nc-chart-4: #c084fc;
+    --nc-chart-5: #f87171;
+    --nc-chart-6: #22d3ee;
+    --nc-chart-7: #facc15;
+    --nc-chart-8: #a3a3a3;
+    --nc-chart-track: #262626;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--nc-bg);
+  --color-bg-subtle: var(--nc-bg-subtle);
+  --color-border: var(--nc-border);
+  --color-border-strong: var(--nc-border-strong);
+  --color-fg: var(--nc-fg);
+  --color-fg-muted: var(--nc-fg-muted);
+  --color-accent: var(--nc-accent);
+  --color-accent-subtle: var(--nc-accent-subtle);
+  --color-primary: var(--nc-primary);
+  --color-primary-hover: var(--nc-primary-hover);
+  --color-primary-fg: var(--nc-primary-fg);
+  --color-ring: var(--nc-ring);
+
+  --color-error: var(--nc-error);
+  --color-error-fg: var(--nc-error-fg);
+  --color-error-subtle: var(--nc-error-subtle);
+  --color-warning: var(--nc-warning);
+  --color-warning-fg: var(--nc-warning-fg);
+  --color-warning-subtle: var(--nc-warning-subtle);
+  --color-info: var(--nc-info);
+  --color-info-fg: var(--nc-info-fg);
+  --color-info-subtle: var(--nc-info-subtle);
+  --color-ok: var(--nc-ok);
+  --color-ok-fg: var(--nc-ok-fg);
+  --color-ok-subtle: var(--nc-ok-subtle);
+
+  --color-chart-1: var(--nc-chart-1);
+  --color-chart-2: var(--nc-chart-2);
+  --color-chart-3: var(--nc-chart-3);
+  --color-chart-4: var(--nc-chart-4);
+  --color-chart-5: var(--nc-chart-5);
+  --color-chart-6: var(--nc-chart-6);
+  --color-chart-7: var(--nc-chart-7);
+  --color-chart-8: var(--nc-chart-8);
+  --color-chart-track: var(--nc-chart-track);
+
+  /* Шрифты: Inter — интерфейс; заголовки 36–48px — Inter 600 (Satoshi нет в Google Fonts);
+     Geist Mono — технические значения (rule_id, номера абзацев). */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Радиусы */
+  --radius-badge: 9999px;
+  --radius-button: 8px;
+  --radius-card: 12px;
+  --radius-card-lg: 16px;
+  --radius-input: 6px;
+
+  /* Сетка: шаг 4px (spacing по умолчанию в Tailwind v4 = 0.25rem), секции — 64px */
+  --spacing-section: 64px;
+  --container-page: 1200px;
+}
+
+/* Переменные, которые ожидают компоненты Bklit UI (соглашение shadcn) — указывают на наши токены */
+:root {
+  --chart-1: var(--nc-chart-1);
+  --chart-2: var(--nc-chart-2);
+  --chart-3: var(--nc-chart-3);
+  --chart-4: var(--nc-chart-4);
+  --chart-5: var(--nc-chart-5);
+  --chart-background: var(--nc-bg-subtle);
+  --chart-foreground: var(--nc-fg);
+  --chart-foreground-muted: var(--nc-fg-muted);
+  --chart-label: var(--nc-fg-muted);
+  --border: var(--nc-chart-track);
+}

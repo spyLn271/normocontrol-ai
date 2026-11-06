@@ -1,0 +1,91 @@
+# Реестр официальных источников требований (формат — docs/RESEARCH.md).
+# Сами файлы лежат в data/ (не в git). rag_source — имя источника в profile.rag_sources:
+# только записи с local_file и rag_source индексируются командой
+#   normocontrol rag index-registry research/sources.yaml
+
+- id: kz-rules-236-2023
+  title: >-
+    Правила документирования, управления документацией и использования систем электронного
+    документооборота в государственных и негосударственных организациях
+  type: regulation
+  jurisdiction: KZ
+  status: active
+  edition_date: "2023-08-25"
+  official_url: null   # TODO: ссылка на adilet.zan.kz (файл получен из ИС «ПАРАГРАФ», статус «действующий» на 09.09.2023)
+  access: free
+  local_file: data/standards/kz-rules-236-2023.pdf
+  rag_source: "Правила документирования № 236"
+  applies_to: [letter, memo, application, order, protocol, act, certificate]
+  used_in_kz: true
+  notes: >-
+    Утверждены приказом Министра культуры и спорта РК от 25 августа 2023 года № 236.
+    Требования к оформлению: п. 7 (формат, поля), п. 15 и 31 (нумерация листов, шрифт, интервал),
+    п. 20–27 (реквизиты), п. 30 (нумерация пунктов), п. 47 (приказ), п. 48 (протокол).
+  checked_by: ""
+  checked_at: "2026-10-25"
+
+- id: kru-mi-049-2026
+  title: >-
+    МИ 049-2026 Требования к выполнению, оформлению курсовых, дипломных работ и проектов
+  type: university_guide
+  jurisdiction: "university:kru"
+  status: active
+  edition_date: "2026"
+  official_url: null   # рабочий экземпляр — на внутреннем сайте университета (п. 112)
+  access: closed       # «не может быть воспроизведена без разрешения» — текст не публикуем
+  local_file: data/standards/kru-mi-049-2026.pdf
+  rag_source: "МИ 049-2026"
+  applies_to: [coursework, thesis]
+  used_in_kz: true
+  notes: >-
+    НАО «Костанайский региональный университет имени Ахмет Байтұрсынұлы». Введена взамен
+    МИ 229-2022. В полученном PDF не заполнены дата и номер приказа об утверждении — уточнить
+    действующую редакцию у вуза. Профиль: profiles/kru-mi-049-2026.yaml.
+  checked_by: ""
+  checked_at: "2026-10-25"
+
+- id: sample-order-amendment-2023
+  title: >-
+    Образец: приказ о внесении изменений в приказ Министра культуры и информации РК
+    от 27 сентября 2023 года № 381-НҚ
+  type: template
+  jurisdiction: KZ
+  status: active
+  local_file: data/samples/order-amendment-sample.pdf
+  applies_to: [order]
+  notes: Пример реального распорядительного документа (PDF) — для анализа структуры, не для RAG.
+
+- id: sample-protocol-public-hearings
+  title: "Образец: протокол общественных слушаний посредством открытых собраний"
+  type: template
+  jurisdiction: KZ
+  status: active
+  local_file: data/samples/protocol-public-hearings-sample.pdf
+  applies_to: [protocol]
+  notes: >-
+    Содержит ФИО участников — использовать только локально, в репозиторий и датасет не включать.
+
+# --- найти и загрузить (этап R) -------------------------------------------------------
+- id: gost-7.32-2017
+  title: ГОСТ 7.32-2017 Отчёт о научно-исследовательской работе. Структура и правила оформления
+  type: standard
+  jurisdiction: INTERSTATE
+  status: active
+  access: free_view
+  local_file: data/standards/gost-7.32-2017.pdf
+  rag_source: "ГОСТ 7.32-2017"
+  applies_to: [report, coursework, thesis]
+  used_in_kz: null     # проверить действие в РК (каталог КазИСМ)
+  notes: Текст ещё не получен — профиль gost-7.32-2017 остаётся черновиком.
+
+- id: gost-7.1-2003
+  title: ГОСТ 7.1-2003 Библиографическая запись. Библиографическое описание
+  type: standard
+  jurisdiction: INTERSTATE
+  status: active
+  access: free_view
+  local_file: data/standards/gost-7.1-2003.pdf
+  rag_source: "ГОСТ 7.1-2003"
+  applies_to: [report, coursework, thesis]
+  used_in_kz: null
+  notes: Текст ещё не получен.

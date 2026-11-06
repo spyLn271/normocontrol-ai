@@ -1,0 +1,189 @@
+[project]
+name = "normocontrol"
+version = "0.1.0"
+description = "Проверка документов на соответствие требованиям нормоконтроля Республики Казахстан"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+license = { text = "Proprietary" }
+authors = [{ name = "Normocontrol AI" }]
+classifiers = [
+    "Private :: Do Not Upload",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+dependencies = [
+    "arq>=0.26",
+    "fastapi>=0.115",
+    "httpx>=0.28",
+    "lxml>=5.3",
+    "prometheus-client>=0.21",
+    "pydantic>=2.10",
+    "pydantic-settings[yaml]>=2.7",
+    "python-docx>=1.2",
+    "python-multipart>=0.0.20",
+    "pyyaml>=6.0.2",
+    "qdrant-client>=1.13",
+    "rapidfuzz>=3.11",
+    "redis>=5.2",
+    "rich>=13.9",
+    "structlog>=24.4",
+    "tenacity>=9.0",
+    "typer>=0.15",
+    "uvicorn[standard]>=0.34",
+]
+
+[project.optional-dependencies]
+# Номера страниц (через PDF от LibreOffice) и извлечение текста стандартов из PDF.
+pdf = ["pypdfium2>=4.30"]
+# Reranker для RAG (тянет torch — ставить только на сервер, где он нужен).
+rerank = ["sentence-transformers>=3.3"]
+
+[project.scripts]
+normocontrol = "normocontrol.cli:app"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.14",
+    "pre-commit>=4.0",
+    "pytest>=8.3",
+    "pytest-asyncio>=0.25",
+    "pytest-cov>=6.0",
+    "respx>=0.22",
+    "ruff>=0.9",
+    "types-pyyaml>=6.0",
+    "types-lxml>=2024.12",
+    "httpx2>=2.9",
+]
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/normocontrol"]
+
+# ---------------------------------------------------------------- ruff
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+extend-exclude = ["web"]
+
+[tool.ruff.lint]
+select = [
+    "A",     # flake8-builtins
+    "ANN",   # flake8-annotations
+    "ARG",   # flake8-unused-arguments
+    "ASYNC", # flake8-async
+    "B",     # flake8-bugbear
+    "BLE",   # flake8-blind-except
+    "C4",    # flake8-comprehensions
+    "DTZ",   # flake8-datetimez
+    "E",     # pycodestyle errors
+    "ERA",   # eradicate (commented-out code)
+    "F",     # pyflakes
+    "FLY",   # flynt
+    "FURB",  # refurb
+    "G",     # flake8-logging-format
+    "I",     # isort
+    "ISC",   # implicit string concatenation
+    "LOG",   # flake8-logging
+    "N",     # pep8-naming
+    "PERF",  # perflint
+    "PIE",   # flake8-pie
+    "PL",    # pylint
+    "PT",    # flake8-pytest-style
+    "PTH",   # flake8-use-pathlib
+    "Q",     # flake8-quotes
+    "RET",   # flake8-return
+    "RSE",   # flake8-raise
+    "RUF",   # ruff-specific
+    "S",     # flake8-bandit
+    "SIM",   # flake8-simplify
+    "T10",   # flake8-debugger
+    "T20",   # flake8-print
+    "TID",   # flake8-tidy-imports
+    "TRY",   # tryceratops
+    "UP",    # pyupgrade
+    "W",     # pycodestyle warnings
+]
+ignore = [
+    "ANN401",  # Any допустим в узких местах (XML, JSON)
+    "ISC001",  # конфликтует с ruff format
+    "PLR0911", # число return — решаем ревью, а не линтером
+    "PLR0912",
+    "PLR0913",
+    "PLR2004", # «магические» числа — это пороги из стандартов
+    "RUF001",  # кириллица в строках — это нормально для проекта
+    "RUF002",
+    "RUF003",
+    "TRY003",  # длинные сообщения в исключениях
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["ANN", "ARG", "PLR0915", "S101", "S105", "S106"]
+"src/normocontrol/cli.py" = ["PLR0915"]
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = ["typer.Argument", "typer.Option", "fastapi.Depends", "fastapi.File", "fastapi.Form"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["normocontrol"]
+
+[tool.ruff.lint.pylint]
+max-args = 8
+
+[tool.ruff.format]
+docstring-code-format = true
+
+# ---------------------------------------------------------------- mypy
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+warn_unreachable = true
+mypy_path = "src"
+files = ["src", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["docx.*", "arq.*", "pypdfium2.*", "sentence_transformers.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+[tool.pydantic-mypy]
+init_forbid_extra = true
+init_typed = true
+warn_required_dynamic_aliases = true
+
+# ---------------------------------------------------------------- pytest
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers", "--strict-config", "-m", "not llm and not integration"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+filterwarnings = [
+    "error",
+    "ignore::DeprecationWarning:docx.*",
+    # arq.Worker.close() вызывает устаревший redis.close()
+    "ignore:Call to deprecated close:DeprecationWarning",
+]
+markers = [
+    "llm: требует запущенной локальной LLM (Ollama)",
+    "integration: требует внешних сервисов (Redis, LibreOffice)",
+]
+
+[tool.coverage.run]
+source = ["normocontrol"]
+branch = true
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+skip_covered = true
+exclude_also = ["if TYPE_CHECKING:", "raise NotImplementedError", "\\.\\.\\."]

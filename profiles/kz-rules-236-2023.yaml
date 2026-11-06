@@ -1,0 +1,66 @@
+# Базовый профиль документов организаций по Правилам документирования, управления
+# документацией и использования систем электронного документооборота в государственных
+# и негосударственных организациях (утв. приказом Министра культуры и спорта РК
+# от 25 августа 2023 года № 236). В source: «п. N» — пункт Правил.
+id: kz-rules-236-2023
+title: "Документы организаций РК — Правила документирования (приказ № 236)"
+status: active
+version: "2023-08-25"
+abstract: false
+description: >
+  Общие требования к служебным документам на бумажном носителе и в электронном формате:
+  письма, служебные записки, заявления, справки. Для приказов — профиль kz-order-236-2023.
+doc_types: [letter, memo, application, certificate]
+languages: [kk, ru]
+
+page:
+  size: [A4, A5]
+  orientation: any
+  margins_cm: {left: 2.0, right: 1.0, top: 1.0, bottom: 1.0}
+  margins_mode: min
+  tolerance_cm: 0.05
+  numbering:
+    required: false   # только для документов на двух и более листах
+    position: top-center
+    arabic: true
+    title_page_numbered: false
+  severity: error
+  source: "Правила № 236, п. 7 — формат А4/А5, поля не менее 20/10/10/10 мм; п. 15, 31 — нумерация со 2 листа в середине верхнего поля"
+
+body_text:
+  font_family: ["Times New Roman", "Arial"]
+  font_size_pt: 14
+  line_spacing: 1.0
+  severity: error
+  source: "Правила № 236, п. 31 — шрифт Times New Roman или Arial № 14, один межстрочный интервал"
+
+text:
+  forbid_dash_paragraphs: true
+  forbid_placeholders: true
+  severity: warning
+  source: "Правила № 236, п. 30 — не допускается обозначение абзацев дефисами или иными знаками"
+
+requisites:
+  items:
+    - id: doc_type_name
+      name: "Наименование вида документа"
+      pattern: "^(ПРИКАЗ|БҰЙРЫҚ|РАСПОРЯЖЕНИЕ|ӨКІМ|ПРОТОКОЛ|ХАТТАМА|АКТ|СПРАВКА|АНЫҚТАМА|СЛУЖЕБНАЯ ЗАПИСКА|ҚЫЗМЕТТІК ЖАЗБА|ЗАЯВЛЕНИЕ|ӨТІНІШ|ОБЪЯСНИТЕЛЬНАЯ ЗАПИСКА|ТҮСІНІКТЕМЕ ХАТ)$"
+      required: false
+      uppercase: true
+      bold: true
+      source: "Правила № 236, п. 20 — наименование вида документа печатается прописными буквами полужирным шрифтом"
+    - id: executor_mark
+      name: "Отметка об исполнителе"
+      pattern: "^(Исп\\.|Орынд\\.)"
+      required: false
+      source: "Правила № 236, п. 40"
+  severity: warning
+  source: "Правила № 236, параграф 2 главы 2"
+
+dates:
+  formats: [numeric, verbal]
+  severity: warning
+  source: "Правила № 236, п. 21 — цифровой способ: ДД.ММ.ГГГГ; словесно-цифровой: «25 августа 2023 года»"
+
+rag_sources:
+  - {source: "Правила документирования № 236", priority: 1}

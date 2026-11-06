@@ -1,0 +1,70 @@
+# Настройки по умолчанию. Любое значение переопределяется переменной окружения
+# NC_<РАЗДЕЛ>__<КЛЮЧ>, например NC_LLM__MODEL=qwen3:4b (см. .env.example).
+# Модели выбираются по бенчмарку (docs/MODELS.md, задача 3.7), а не в коде.
+
+env: dev
+log:
+  level: INFO
+  json_format: false
+
+profiles_dir: profiles
+default_profile: kru-mi-049-2026
+
+llm:
+  enabled: true
+  provider: ollama            # ollama | openai_compatible (vLLM, llama.cpp server)
+  base_url: http://localhost:11434
+  model: qwen3:8b
+  temperature: 0.1
+  num_ctx: 8192
+  think: false                # режим размышлений Qwen3 — точнее, но медленнее
+  timeout_s: 120
+  max_retries: 2
+  max_concurrency: 2
+  batch_size: 5               # записей литературы в одном запросе
+  log_dir: null               # logs/llm — только для отладки: в логах фрагменты документов
+
+embeddings:
+  provider: ollama
+  base_url: http://localhost:11434
+  model: bge-m3
+  batch_size: 16
+
+reranker:
+  enabled: false
+  model: BAAI/bge-reranker-v2-m3
+
+vector_store:
+  backend: qdrant
+  url: null                   # http://qdrant:6333 в продакшене; null — встроенный режим
+  path: data/vectors
+  collection: standards
+
+rag:
+  enabled: true
+  top_k: 5
+  candidates: 20
+  min_score: 0.3
+  max_chunk_tokens: 800
+  chunk_overlap_tokens: 80
+
+pages:
+  mode: auto                  # auto | on | off — номера страниц через LibreOffice
+  soffice_path: soffice
+  timeout_s: 90
+
+jobs:
+  backend: inline             # inline (один процесс) | arq (Redis + воркеры)
+  redis_url: redis://localhost:6379/0
+  max_concurrency: 2
+  max_pending: 100
+  timeout_s: 600
+  result_ttl_s: 3600
+
+api:
+  host: 127.0.0.1
+  port: 8000
+  cors_origins: ["http://localhost:3000"]
+  max_upload_mb: 20
+  docs_enabled: true
+  metrics_enabled: true

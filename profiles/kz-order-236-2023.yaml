@@ -1,0 +1,36 @@
+# Приказ организации по Правилам документирования (приказ МКС РК № 236 от 25.08.2023).
+# Наследует общие требования kz-rules-236-2023 и добавляет реквизиты приказа (п. 47).
+id: kz-order-236-2023
+extends: kz-rules-236-2023
+title: "Приказ организации РК — Правила документирования (приказ № 236)"
+status: active
+version: "2023-08-25"
+doc_types: [order]
+
+page:
+  numbering:
+    required: false
+    position: top-center
+    arabic: true
+    title_page_numbered: false
+  source: "Правила № 236, п. 7; п. 47 — листы приказов нумеруются сквозной нумерацией в верхней части по центру"
+
+requisites:
+  items:
+    - id: doc_type_name
+      name: "Наименование вида документа «ПРИКАЗ»"
+      pattern: "^(ПРИКАЗ|БҰЙРЫҚ)$"
+      required: true
+      uppercase: true
+      bold: true
+      source: "Правила № 236, п. 20, п. 47 подп. 3)"
+    - id: order_prikazyvayu
+      name: "Слово «ПРИКАЗЫВАЮ» в конце преамбулы"
+      pattern: "(ПРИКАЗЫВАЮ|БҰЙЫРАМЫН)\\s*:?\\s*$"
+      required: true
+      uppercase: true
+      bold: true
+      single_line: true
+      source: "Правила № 236, п. 47 — «ПРИКАЗЫВАЮ» пишется прописными буквами, полужирным шрифтом, без переноса"
+  severity: error
+  source: "Правила № 236, п. 47 — реквизиты приказа"

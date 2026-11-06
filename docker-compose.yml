@@ -1,0 +1,117 @@
+# Полный стек: API + воркеры + веб + Redis + Qdrant + Ollama.
+#   cp .env.example .env && docker compose up -d --build
+#   docker compose --profile tools run --rm indexer   # загрузить стандарты в базу знаний
+# GPU (NVIDIA): docker compose -f docker-compose.yml -f docker-compose.gpu.yml up -d
+name: normocontrol
+
+x-backend: &backend
+  build:
+    context: .
+    args:
+      WITH_LIBREOFFICE: "true"
+  image: normocontrol/api:${NC_VERSION:-0.1.0}
+  env_file:
+    - path: .env
+      required: false
+  environment: &backend-env
+    NC_JOBS__BACKEND: arq
+    NC_JOBS__REDIS_URL: redis://redis:6379/0
+    NC_VECTOR_STORE__URL: http://qdrant:6333
+    NC_LLM__BASE_URL: http://ollama:11434
+    NC_EMBEDDINGS__BASE_URL: http://ollama:11434
+    NC_API__CORS_ORIGINS: '[]'
+  depends_on:
+    redis:
+      condition: service_healthy
+    qdrant:
+      condition: service_started
+  restart: unless-stopped
+  read_only: true
+  tmpfs:
+    - /tmp
+    - /home/app
+  security_opt:
+    - no-new-privileges:true
+
+services:
+  api:
+    <<: *backend
+    command: ["serve"]
+    ports:
+      - "${NC_API_PORT:-8000}:8000"
+
+  worker:
+    <<: *backend
+    command: ["worker"]
+    healthcheck:
+      disable: true
+    deploy:
+      replicas: ${NC_WORKERS:-1}
+
+  web:
+    build: ./web
+    image: normocontrol/web:${NC_VERSION:-0.1.0}
+    environment:
+      API_URL: http://api:8000
+    ports:
+      - "${NC_WEB_PORT:-3000}:3000"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.4.10-alpine
+    # Все ключи проверок с TTL; без персистентности — документы не попадают на диск
+    command: ["redis-server", "--save", "", "--appendonly", "no", "--maxmemory", "1gb", "--maxmemory-policy", "volatile-ttl"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:v1.19.2-unprivileged
+    volumes:
+      - qdrant:/qdrant/storage
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:0.40.2
+    volumes:
+      - ollama:/root/.ollama
+    environment:
+      OLLAMA_KEEP_ALIVE: 30m
+      OLLAMA_NUM_PARALLEL: ${OLLAMA_NUM_PARALLEL:-2}
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  ollama-init:
+    image: ollama/ollama:0.40.2
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      OLLAMA_HOST: ollama:11434
+      LLM_MODEL: ${NC_LLM__MODEL:-qwen3:8b}
+      EMBEDDING_MODEL: ${NC_EMBEDDINGS__MODEL:-bge-m3}
+    entrypoint: ["/bin/sh", "-c", "ollama pull \"$$EMBEDDING_MODEL\" && ollama pull \"$$LLM_MODEL\""]
+    restart: "no"
+
+  indexer:
+    <<: *backend
+    profiles: ["tools"]
+    command: ["rag", "index-registry", "research/sources.yaml"]
+    read_only: false
+    volumes:
+      - ./data:/app/data:ro
+      - ./research:/app/research:ro
+    restart: "no"
+
+volumes:
+  qdrant:
+  ollama:

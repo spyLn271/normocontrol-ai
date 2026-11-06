@@ -1,0 +1,502 @@
+{
+  "schema_version": "1.0",
+  "created_at": "2026-10-25T19:45:14.185164Z",
+  "duration_ms": 1353,
+  "document": {
+    "filename": "kursovaya_rabota.docx",
+    "paragraphs": 97,
+    "words": 781,
+    "tables": 3,
+    "images": 3,
+    "sections": 1,
+    "pages_estimated": 8,
+    "page_source": "breaks"
+  },
+  "profile": {
+    "id": "kru-mi-049-2026",
+    "title": "КРУ им. А. Байтұрсынұлы — курсовые и дипломные работы (МИ 049-2026)",
+    "status": "active",
+    "version": "2026"
+  },
+  "engine": {
+    "version": "0.1.0",
+    "llm_model": null,
+    "embedding_model": null
+  },
+  "score": 39,
+  "summary": {
+    "total": 7,
+    "by_severity": {
+      "error": 4,
+      "warning": 3,
+      "info": 0
+    },
+    "by_category": {
+      "paragraph": 2,
+      "page": 1,
+      "font": 1,
+      "bibliography": 1,
+      "figures": 1,
+      "tables": 1
+    }
+  },
+  "issues": [
+    {
+      "rule_id": "page.margins",
+      "category": "page",
+      "severity": "error",
+      "checker": "rule",
+      "message": "Левое поле 2 см, требуется 3 см",
+      "expected": "3 см",
+      "actual": "2 см",
+      "fix": "Макет → Поля → Настраиваемые поля: левое 3 см",
+      "reference": "МИ 049-2026, п. 47 (с. 13–14) — формат А4, поля; п. 40 (с. 10) — номер на титульном листе не ставится",
+      "reference_quote": null,
+      "location": {
+        "paragraph_ids": [],
+        "pages": [],
+        "section_index": 0,
+        "quote": null
+      },
+      "count": 1
+    },
+    {
+      "rule_id": "paragraph.line_spacing",
+      "category": "paragraph",
+      "severity": "error",
+      "checker": "rule",
+      "message": "Межстрочный интервал 2 в 2 абзацах (стр. 3, 5), требуется 1",
+      "expected": "1",
+      "actual": "2",
+      "fix": "Абзац → Междустрочный интервал → множитель 1",
+      "reference": "МИ 049-2026, п. 47 (с. 13–14) — Times New Roman, кегль 14, одинарный интервал, абзацный отступ 1,25 см",
+      "reference_quote": null,
+      "location": {
+        "paragraph_ids": [
+          "p-22",
+          "p-48"
+        ],
+        "pages": [
+          3,
+          5
+        ],
+        "section_index": null,
+        "quote": "Для решения поставленных задач использованы стандартные методики химического анализа. Сравнение показателей выполнено с…"
+      },
+      "count": 2
+    },
+    {
+      "rule_id": "font.size",
+      "category": "font",
+      "severity": "error",
+      "checker": "rule",
+      "message": "Размер шрифта 12 pt в 5 абзацах (стр. 3–6), требуется 14 pt",
+      "expected": "14 pt",
+      "actual": "12 pt",
+      "fix": "Выделите текст и установите нужный размер шрифта (Главная → Размер шрифта)",
+      "reference": "МИ 049-2026, п. 47 (с. 13–14) — Times New Roman, кегль 14, одинарный интервал, абзацный отступ 1,25 см",
+      "reference_quote": null,
+      "location": {
+        "paragraph_ids": [
+          "p-23",
+          "p-27",
+          "p-51",
+          "p-54",
+          "p-85"
+        ],
+        "pages": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "section_index": null,
+        "quote": "Установлено, что предварительная подготовка адсорбента повышает эффективность очистки. Сравнение показателей выполнено …"
+      },
+      "count": 5
+    },
+    {
+      "rule_id": "paragraph.first_line_indent",
+      "category": "paragraph",
+      "severity": "error",
+      "checker": "rule",
+      "message": "Абзацный отступ сделан пробелами или табуляцией в 3 абзацах (стр. 4–6), требуется 1,25 см",
+      "expected": "1,25 см",
+      "actual": "пробелами или табуляцией",
+      "fix": "Абзац → Отступ → первая строка: 1,25 см; уберите пробелы и табуляцию в начале",
+      "reference": "МИ 049-2026, п. 47 (с. 13–14) — Times New Roman, кегль 14, одинарный интервал, абзацный отступ 1,25 см",
+      "reference_quote": null,
+      "location": {
+        "paragraph_ids": [
+          "p-44",
+          "p-47",
+          "p-72"
+        ],
+        "pages": [
+          4,
+          5,
+          6
+        ],
+        "section_index": null,
+        "quote": "Актуальность исследования обусловлена ростом требований к качеству питьевой воды. Полученные результаты согласуются с д…"
+      },
+      "count": 3
+    },
+    {
+      "rule_id": "bibliography.unknown_citation",
+      "category": "bibliography",
+      "severity": "warning",
+      "checker": "structure",
+      "message": "Ссылки на отсутствующие в списке источники: [99]",
+      "expected": null,
+      "actual": null,
+      "fix": "Проверьте номера ссылок или добавьте источники в список",
+      "reference": "МИ 049-2026, п. 45 (с. 12–13), Приложение И (с. 32)",
+      "reference_quote": null,
+      "location": {
+        "paragraph_ids": [
+          "p-27"
+        ],
+        "pages": [
+          4
+        ],
+        "section_index": null,
+        "quote": "Для решения поставленных задач использованы стандартные методики химического анализа. Результаты измерений приведены дл…"
+      },
+      "count": 1
+    },
+    {
+      "rule_id": "figures.caption_position",
+      "category": "figures",
+      "severity": "warning",
+      "checker": "structure",
+      "message": "Подпись «Рисунок 1 – Схема установки 1» должна располагаться под рисунком",
+      "expected": null,
+      "actual": null,
+      "fix": "Перенесите подпись под рисунок",
+      "reference": "МИ 049-2026, п. 74, 76–78 (с. 16–17), Приложение Л (с. 34)",
+      "reference_quote": null,
+      "location": {
+        "paragraph_ids": [
+          "p-28"
+        ],
+        "pages": [
+          4
+        ],
+        "section_index": null,
+        "quote": "Рисунок 1 – Схема установки 1"
+      },
+      "count": 1
+    },
+    {
+      "rule_id": "tables.caption_missing",
+      "category": "tables",
+      "severity": "warning",
+      "checker": "structure",
+      "message": "У таблицы 3 нет названия «Таблица N – …»",
+      "expected": null,
+      "actual": null,
+      "fix": "Добавьте над таблицей строку «Таблица 1 – Название»",
+      "reference": "МИ 049-2026, п. 54, 56, 57 (с. 15), Приложение К (с. 33)",
+      "reference_quote": null,
+      "location": {
+        "paragraph_ids": [
+          "p-76"
+        ],
+        "pages": [
+          6
+        ],
+        "section_index": null,
+        "quote": "Показатель"
+      },
+      "count": 1
+    }
+  ],
+  "notices": [
+    {
+      "code": "pages_approximate",
+      "level": "info",
+      "message": "Номера страниц оценены приблизительно (по разрывам страниц)"
+    },
+    {
+      "code": "llm_disabled",
+      "level": "info",
+      "message": "ИИ-проверки отключены: оформление записей списка литературы не проверялось"
+    }
+  ],
+  "checks": [
+    {
+      "rule_id": "page.size",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "page.orientation",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "page.margins",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 1,
+      "detail": null
+    },
+    {
+      "rule_id": "page.numbering",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "font.family",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "font.size",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 1,
+      "detail": null
+    },
+    {
+      "rule_id": "paragraph.line_spacing",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 1,
+      "detail": null
+    },
+    {
+      "rule_id": "paragraph.first_line_indent",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 1,
+      "detail": null
+    },
+    {
+      "rule_id": "paragraph.alignment",
+      "checker": "rule",
+      "status": "skipped",
+      "issues": 0,
+      "detail": "требование не задано в профиле"
+    },
+    {
+      "rule_id": "text.dash_paragraphs",
+      "checker": "rule",
+      "status": "skipped",
+      "issues": 0,
+      "detail": "требование не задано в профиле"
+    },
+    {
+      "rule_id": "text.double_spaces",
+      "checker": "rule",
+      "status": "skipped",
+      "issues": 0,
+      "detail": "требование не задано в профиле"
+    },
+    {
+      "rule_id": "text.empty_paragraphs",
+      "checker": "rule",
+      "status": "skipped",
+      "issues": 0,
+      "detail": "требование не задано в профиле"
+    },
+    {
+      "rule_id": "text.placeholders",
+      "checker": "rule",
+      "status": "skipped",
+      "issues": 0,
+      "detail": "требование не задано в профиле"
+    },
+    {
+      "rule_id": "heading.case",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "heading.trailing_dot",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "heading.bold",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "heading.underline",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "heading.alignment",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "heading.indent",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "heading.number_format",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "heading.new_page",
+      "checker": "rule",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "requisites",
+      "checker": "rule",
+      "status": "skipped",
+      "issues": 0,
+      "detail": "требование не задано в профиле"
+    },
+    {
+      "rule_id": "dates.format",
+      "checker": "rule",
+      "status": "skipped",
+      "issues": 0,
+      "detail": "требование не задано в профиле"
+    },
+    {
+      "rule_id": "structure.required_sections",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "structure.order",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "structure.toc_matches",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "figures.caption_format",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "tables.caption_format",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "tables.caption_position",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 1,
+      "detail": null
+    },
+    {
+      "rule_id": "figures.caption_position",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 1,
+      "detail": null
+    },
+    {
+      "rule_id": "figures.caption_alignment",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "tables.caption_alignment",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "figures.numbering",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "tables.numbering",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "figures.referenced",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "tables.referenced",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "bibliography.cited",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 1,
+      "detail": null
+    },
+    {
+      "rule_id": "bibliography.order",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    },
+    {
+      "rule_id": "bibliography.numbering",
+      "checker": "structure",
+      "status": "ok",
+      "issues": 0,
+      "detail": null
+    }
+  ]
+}

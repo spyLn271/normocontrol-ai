@@ -1,0 +1,83 @@
+# ЧЕРНОВИК. Значения нужно сверить с актуальным текстом ГОСТ 7.32-2017
+# и проставить точные пункты в поле source. См. docs/RULES.md.
+# Текста стандарта в data/standards/ пока нет — поэтому status: draft,
+# а в отчёте пользователь видит предупреждение «профиль-черновик».
+id: gost-7.32-2017
+title: "ГОСТ 7.32-2017 — Отчёт о научно-исследовательской работе"
+status: draft
+version: "2017"
+doc_types: [report, coursework, thesis]
+languages: [ru, kk]
+
+page:
+  size: A4
+  orientation: portrait
+  margins_cm: {left: 3.0, right: 1.5, top: 2.0, bottom: 2.0}
+  tolerance_cm: 0.1
+  numbering:
+    position: bottom-center
+    arabic: true
+    title_page_numbered: false
+  severity: error
+  source: "TODO: пункт стандарта"
+
+body_text:
+  font_family: ["Times New Roman"]
+  font_size_pt: {min: 12, recommended: 14}
+  line_spacing: 1.5
+  first_line_indent_cm: 1.25
+  alignment: justify
+  severity: error
+  source: "TODO: пункт стандарта"
+
+headings:
+  section:
+    case: upper_or_sentence   # уточнить по стандарту
+    trailing_dot: false
+    bold: true
+  severity: warning
+  source: "TODO: пункт стандарта"
+
+structure:
+  required_sections:
+    - {name: "Титульный лист", kind: title_page}
+    - {name: "Реферат", optional: true, aliases: ["Аңдатпа"]}
+    - {name: "Содержание", aliases: ["Оглавление", "Мазмұны"]}
+    - {name: "Введение", aliases: ["Кіріспе"]}
+    - {name: "Основная часть", any_heading: true}
+    - {name: "Заключение", aliases: ["Қорытынды"]}
+    - {name: "Список использованных источников",
+       aliases: ["Список литературы", "Пайдаланылған әдебиеттер тізімі",
+                "Пайдаланылған дереккөздер тізімі"]}
+    - {name: "Приложения", optional: true, aliases: ["Приложение", "Қосымша"]}
+  check_order: true
+  toc_matches_headings: true
+  severity: error
+  source: "TODO: пункт стандарта"
+
+figures:
+  caption_pattern: "^(Рисунок|Сурет) \\d+(\\.\\d+)? – .+"
+  caption_position: below
+  numbering: any
+  require_reference: true
+  severity: warning
+  source: "TODO: пункт стандарта"
+
+tables:
+  caption_pattern: "^(Таблица|Кесте) \\d+(\\.\\d+)? – .+"
+  caption_position: above
+  numbering: any
+  require_reference: true
+  severity: warning
+  source: "TODO: пункт стандарта"
+
+bibliography:
+  standard: "ГОСТ 7.1-2003"
+  checker: llm
+  require_citation_in_text: true
+  severity: warning
+  source: "TODO: пункт стандарта"
+
+rag_sources:
+  - {source: "ГОСТ 7.32-2017", priority: 1}
+  - {source: "ГОСТ 7.1-2003", priority: 2}

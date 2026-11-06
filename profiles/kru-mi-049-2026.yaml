@@ -1,0 +1,104 @@
+# Профиль по методической инструкции МИ 049-2026 «Требования к выполнению, оформлению
+# курсовых, дипломных работ и проектов», НАО «Костанайский региональный университет
+# имени Ахмет Байтұрсынұлы» (введена взамен МИ 229-2022).
+# В source: «п. N» — пункт инструкции, «с. N» — страница PDF-файла инструкции.
+id: kru-mi-049-2026
+title: "КРУ им. А. Байтұрсынұлы — курсовые и дипломные работы (МИ 049-2026)"
+status: active
+version: "2026"
+description: >
+  Курсовые и дипломные работы (проекты), в том числе групповые дипломные проекты
+  в формате стартапа (гл. 7). Требования к содержанию работы не проверяются.
+doc_types: [coursework, thesis]
+languages: [ru, kk]
+
+page:
+  size: A4
+  orientation: portrait
+  margins_cm: {left: 3.0, right: 1.0, top: 2.0, bottom: 2.0}
+  margins_mode: exact
+  tolerance_cm: 0.1
+  numbering:
+    required: true
+    position: bottom-center
+    arabic: true
+    title_page_numbered: false
+  severity: error
+  source: "МИ 049-2026, п. 47 (с. 13–14) — формат А4, поля; п. 40 (с. 10) — номер на титульном листе не ставится"
+
+body_text:
+  font_family: ["Times New Roman"]
+  font_size_pt: 14
+  line_spacing: 1.0
+  first_line_indent_cm: 1.25
+  severity: error
+  source: "МИ 049-2026, п. 47 (с. 13–14) — Times New Roman, кегль 14, одинарный интервал, абзацный отступ 1,25 см"
+
+headings:
+  section:
+    case: sentence
+    trailing_dot: false
+    underline: false
+    indent: first_line
+    new_page: true
+    number_trailing_dot: false
+  subsection:
+    case: sentence
+    trailing_dot: false
+    underline: false
+    indent: first_line
+    number_trailing_dot: false
+  structural:
+    case: sentence
+    trailing_dot: false
+    bold: true
+    alignment: center
+    new_page: true
+  severity: warning
+  source: "МИ 049-2026, п. 49–50, 52 (с. 14) — разделы; п. 41, 42, 44, 45, 46 (с. 10–13) — структурные элементы"
+
+structure:
+  required_sections:
+    - {name: "Титульный лист", kind: title_page}
+    - {name: "Содержание", aliases: ["Мазмұны", "Оглавление"]}
+    - {name: "Введение", aliases: ["Кіріспе"]}
+    - {name: "Основная часть", any_heading: true}
+    - {name: "Заключение", aliases: ["Выводы", "Заключение (выводы)", "Қорытынды"]}
+    - {name: "Список использованных источников",
+       aliases: ["Пайдаланылған дереккөздер тізімі", "Пайдаланылған әдебиеттер тізімі"]}
+    - {name: "Приложения", optional: true, aliases: ["Приложение", "Қосымша", "Қосымшалар"]}
+  check_order: true
+  toc_matches_headings: true
+  severity: error
+  source: "МИ 049-2026, п. 36 (с. 9–10) — состав и порядок; п. 41 (с. 10) — содержание повторяет заголовки"
+
+figures:
+  caption_pattern: "^(Рисунок|Сурет)\\s+([А-ЯA-Z]\\s?)?\\d+(\\.\\d+)?(\\s+[-–—]\\s+\\S.*)?$"
+  caption_position: below
+  caption_alignment: center
+  numbering: continuous
+  require_reference: true
+  severity: warning
+  source: "МИ 049-2026, п. 74, 76–78 (с. 16–17), Приложение Л (с. 34)"
+
+tables:
+  caption_pattern: "^(Таблица|Кесте)\\s+([А-ЯA-Z]\\s?)?\\d+\\s+[-–—]\\s+\\S.*$"
+  caption_position: above
+  caption_alignment: left
+  caption_indent: none
+  numbering: continuous
+  require_reference: true
+  severity: warning
+  source: "МИ 049-2026, п. 54, 56, 57 (с. 15), Приложение К (с. 33)"
+
+bibliography:
+  checker: llm
+  require_citation_in_text: true
+  citation_style: square_brackets
+  order: appearance
+  entry_number_trailing_dot: false
+  severity: warning
+  source: "МИ 049-2026, п. 45 (с. 12–13), Приложение И (с. 32)"
+
+rag_sources:
+  - {source: "МИ 049-2026", priority: 1}
